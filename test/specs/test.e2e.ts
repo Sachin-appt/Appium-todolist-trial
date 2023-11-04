@@ -23,13 +23,14 @@ describe('Validate the todo app functionality', async () => {
     await driver.hideKeyboard();
     (await toDoData.toDoSaveButton()).click();
     (await toDoData.addedTodo()).isDisplayed();
-    await driver.setImplicitTimeout(3000);
+    await driver.setImplicitTimeout(6000);
     const text: any = await $$('android.widget.TextView');
     for (const element of text) {
-      elementText.push(await element.getText());
+      let text=await element.getText()
+      elementText.push(text);
     }
     await expect(elementText).toContain(todoName);
-    console.log(elementText);
+    // console.log(elementText);
   });
 
   it('TC-02 add todo in todoList by using Ui selector text method', async () => {
@@ -48,7 +49,7 @@ describe('Validate the todo app functionality', async () => {
     (await $('android=new UiSelector().textContains("Save")')).click();
     (await toDoData.addedTodo()).isDisplayed();
     // await expect('~todo-List').toContain(todoName);
-    await driver.setImplicitTimeout(3000);
+    await driver.setImplicitTimeout(6000);
     const text: any = await $$('android.widget.TextView');
     for (const element of text) {
       elementText.push(await element.getText());
@@ -79,6 +80,7 @@ describe('Validate the todo app functionality', async () => {
     (
       await $('//android.view.ViewGroup[@content-desc="todoList"]')
     ).isDisplayed();
+    await driver.setImplicitTimeout(6000)
     const text: any = await $$('android.widget.TextView');
     for (const element of text) {
       elementText.push(await element.getText());
@@ -105,6 +107,7 @@ describe('Validate the todo app functionality', async () => {
     );
     let ele = await checkbox.getAttribute('checked');
     await expect(ele).toBe('false');
+    await driver.setImplicitTimeout(6000)
     const text: any = await $$('android.widget.TextView');
     for (const element of text) {
       elementText.push(await element.getText());

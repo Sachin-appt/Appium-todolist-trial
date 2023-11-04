@@ -163,7 +163,7 @@ export const config: Options.Testrunner = {
       'allure',
       {
         outputDir: 'allure-results',
-        disableWebdriverStepsReporting: true,
+        disableWebdriverStepsReporting: false,
         disableWebdriverScreenshotsReporting: false,
       },
     ],
@@ -308,12 +308,12 @@ export const config: Options.Testrunner = {
   /**
    * Gets executed after all workers got shut down and the process is about to exit. An error
    * thrown in the onComplete hook will result in the test run failing.
-   * @param {object} exitCode 0 - success, 1 - fail
-   * @param {object} config wdio configuration object
-   * @param {Array.<Object>} capabilities list of capabilities details
-   * @param {<Object>} results object containing test results
+   * @param {object} _exitCode 0 - success, 1 - fail
+   * @param {object} _config wdio configuration object
+   * @param {Array.<Object>} _capabilities list of capabilities details
+   * @param {<Object>} _results object containing test results
    */
-  onComplete: function () {
+  onComplete: function (_exitCode, _config, _capabilities, _results) {
     const reportError = new Error('Could not generate Allure report');
     const generation = allure(['generate', 'allure-results', '--clean']);
     return new Promise<void>((resolve, reject) => {
