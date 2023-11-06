@@ -26,8 +26,8 @@ describe('Validate the todo app functionality', async () => {
     await driver.setImplicitTimeout(6000);
     const text: any = await $$('android.widget.TextView');
     for (const element of text) {
-      let text=await element.getText()
-      elementText.push(text);
+      let eltext = await element.getText();
+      elementText.push(eltext);
     }
     await expect(elementText).toContain(todoName);
     // console.log(elementText);
@@ -80,7 +80,7 @@ describe('Validate the todo app functionality', async () => {
     (
       await $('//android.view.ViewGroup[@content-desc="todoList"]')
     ).isDisplayed();
-    await driver.setImplicitTimeout(6000)
+    await driver.setImplicitTimeout(6000);
     const text: any = await $$('android.widget.TextView');
     for (const element of text) {
       elementText.push(await element.getText());
@@ -107,7 +107,7 @@ describe('Validate the todo app functionality', async () => {
     );
     let ele = await checkbox.getAttribute('checked');
     await expect(ele).toBe('false');
-    await driver.setImplicitTimeout(6000)
+    await driver.setImplicitTimeout(6000);
     const text: any = await $$('android.widget.TextView');
     for (const element of text) {
       elementText.push(await element.getText());
