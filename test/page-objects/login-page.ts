@@ -1,6 +1,8 @@
 // import { $ } from '@wdio/globals'
 // import Page from './page';
 
+import {Selector} from 'webdriverio';
+
 // import {Selector} from 'webdriverio';
 
 /**
@@ -27,6 +29,14 @@ class TodoPage {
   addedTodo() {
     return $('~added-Todo');
   }
+  todoButton(button: Selector) {
+    return $(button);
+  }
+
+  commonXpathSelector(xPathLocator: Selector) {
+    return $(xPathLocator);
+  }
+  propTitle = 'Add Todo Here';
 }
 
 export default new TodoPage();

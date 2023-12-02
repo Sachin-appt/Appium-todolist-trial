@@ -22,7 +22,7 @@ const EditTodoView = (props: IEditTodoProps) => {
   const colors = ['#87D3F5', '#BDE991', '#BAAAFB'];
   const [colorIndex, setColorIndex] = useState(0);
 
-  const title = props.data ? 'Edit Todo' : 'Add Todo';
+  const title = props.data ? 'Edit Todo' : 'Add Todo Here';
   const [text, setText] = useState(props.data?.text || '');
 
   const onSave = () => {

@@ -7,7 +7,7 @@ interface IMenu {
 
 const Menu = (props: IMenu) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} accessibilityLabel="addTodo-button">
       <Button title="AddToDo" onPress={() => props.onAddTodo()} />
     </View>
   );

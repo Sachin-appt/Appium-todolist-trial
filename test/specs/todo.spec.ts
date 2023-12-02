@@ -1,4 +1,4 @@
-import toDoData from '../pageobjects/login-page';
+import toDoData from '../page-objects/login-page';
 import {faker} from '@faker-js/faker';
 describe('Validate the todo app functionality', async () => {
   beforeEach(async () => {
@@ -26,11 +26,10 @@ describe('Validate the todo app functionality', async () => {
     await driver.setImplicitTimeout(6000);
     const text: any = await $$('android.widget.TextView');
     for (const element of text) {
-      let eltext = await element.getText();
-      elementText.push(eltext);
+      let elText = await element.getText();
+      elementText.push(elText);
     }
     await expect(elementText).toContain(todoName);
-    // console.log(elementText);
   });
 
   it('TC-02 add todo in todoList by using Ui selector text method', async () => {
@@ -48,16 +47,12 @@ describe('Validate the todo app functionality', async () => {
     await driver.hideKeyboard();
     (await $('android=new UiSelector().textContains("Save")')).click();
     (await toDoData.addedTodo()).isDisplayed();
-    // await expect('~todo-List').toContain(todoName);
     await driver.setImplicitTimeout(6000);
     const text: any = await $$('android.widget.TextView');
     for (const element of text) {
       elementText.push(await element.getText());
     }
     await expect(elementText).toContain(todoName);
-    // console.log(elementText);
-
-    // await expect(toDoData.addedTodo()).toHaveText(todoName);
   });
 
   it('TC-03 add todo in todoList by using xpath', async () => {
@@ -75,7 +70,6 @@ describe('Validate the todo app functionality', async () => {
     ).click();
     await driver.setImplicitTimeout(3000);
     await driver.hideKeyboard();
-    // (await $('android=new UiSelector().textContains("Save")')).click();
     (await $('//*[@text="Save"]')).click();
     (
       await $('//android.view.ViewGroup[@content-desc="todoList"]')
@@ -86,7 +80,6 @@ describe('Validate the todo app functionality', async () => {
       elementText.push(await element.getText());
     }
     await expect(elementText).toContain(todoName);
-    // console.log(elementText);
   });
 
   it('TC-04 add todo in todoList and should check in checkbox', async () => {
@@ -113,6 +106,15 @@ describe('Validate the todo app functionality', async () => {
       elementText.push(await element.getText());
     }
     await expect(elementText).toContain(todoName);
-    console.log(elementText);
+  });
+
+  it('Validate the image and text of toDoApp', async () => {
+    let toDoButton = await toDoData.todoButton('//*[@text="ADDTODO"]');
+    await expect(toDoButton).toHaveText('ADDTODO');
+    await toDoButton.click();
+    let propTitle = await toDoData.commonXpathSelector(
+      '//*[@text="Add Todo Here"]',
+    );
+    expect(propTitle).toHaveText(toDoData.propTitle);
   });
 });
